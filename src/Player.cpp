@@ -73,16 +73,15 @@ void Player::input(sf::Event &event)
 void Player::draw(sf::RenderWindow &rwin)
 {
 	rwin.draw(self);
+	
+	float dx = sf::Mouse::getPosition(rwin).x - x;
+	float dy = sf::Mouse::getPosition(rwin).y - y;
+	self.setRotation(atan2(dy, dx) * (180 / Helper::getPI()));
 }
 
 void Player::update(float dt)
 {
 	self.setPosition(x, y);
-	
-	float dx = sf::Mouse::getPosition().x - x;
-	float dy = sf::Mouse::getPosition().y - y;
-	sf::Vector2i p = sf::Vector2i(dx, dy);
-	self.setRotation(atan2(p.y, p.x) * (180 / Helper::getPI()));
 	
 	if (right == true && left == false)
 	{
